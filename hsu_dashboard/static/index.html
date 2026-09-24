@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HSU Student Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F4FA;--card:#fff;--ink:#1D1A2E;--muted:#6B6784;--line:#E4E0EF;--hema:#3B2F7A;--hema-soft:#E9E5F8;--eosin:#D63A73;--eosin-soft:#FCE5ED}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14121F;--card:#1E1B2E;--ink:#ECE9F7;--muted:#9C97B8;--line:#2E2A45;--hema:#B3A7FF;--hema-soft:#2B2650;--eosin:#FF7AA5;--eosin-soft:#3D1E30}}
+:root[data-theme="dark"]{--bg:#14121F;--card:#1E1B2E;--ink:#ECE9F7;--muted:#9C97B8;--line:#2E2A45;--hema:#B3A7FF;--hema-soft:#2B2650;--eosin:#FF7AA5;--eosin-soft:#3D1E30}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 Vazirmatn,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1080px;margin:0 auto;padding:1rem}
+h1,h2,p{margin:0}
+h2{font-size:1.05rem;font-weight:800;margin-bottom:.7rem}
+section{margin-top:1.6rem}
+header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+header h1{font-size:1.1rem;font-weight:800}
+.muted{color:var(--muted);font-size:.88rem}
+.hero{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.4rem}
+.plate{width:9.5rem;height:9.5rem;flex:none;border-radius:50%;border:3px solid var(--eosin);display:grid;place-content:center;text-align:center;position:relative;background:var(--eosin-soft)}
+.plate:before{content:"";position:absolute;inset:8px;border-radius:50%;border:1.5px dashed var(--eosin);opacity:.55}
+.plate b{font-size:3.4rem;line-height:1;font-weight:800;color:var(--eosin)}
+.plate span{font-size:.85rem;color:var(--muted)}
+.hero h2{font-size:1.5rem;line-height:1.35;margin:.1rem 0}
+.stats{display:flex;gap:1.6rem;margin-top:1rem;flex-wrap:wrap}
+.stats b{display:block;font-size:1.5rem;font-weight:800;color:var(--hema);line-height:1.2}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{font:inherit;font-size:.85rem;padding:.3rem .9rem;border:0;background:var(--card);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--hema);color:var(--card)}
+button:focus-visible{outline:2px solid var(--eosin);outline-offset:2px}
+.today{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem}
+.chip{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--hema);border-radius:10px;padding:.4rem .8rem;font-size:.85rem}
+.chip.lab{border-left-color:var(--eosin)}
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.timetable{display:grid;min-width:760px}
+.hour,.day,.cell{border-bottom:1px solid var(--line);border-left:1px solid var(--line)}
+.hour{font-size:.75rem;color:var(--muted);text-align:center;padding:.3rem 0}
+.day{padding:.5rem;font-weight:600;font-size:.9rem;display:flex;align-items:center}
+.day.current{color:var(--eosin)}
+.session{margin:3px;padding:.35rem .5rem;border-radius:9px;font-size:.76rem;line-height:1.45;overflow:hidden;background:var(--hema-soft);border-left:3px solid var(--hema);z-index:1}
+.session.lab{background:var(--eosin-soft);border-left-color:var(--eosin)}
+.session b{display:block;font-weight:600}
+.session small{color:var(--muted);display:block}
+.session i{font-style:normal;font-size:.68rem;background:var(--card);border-radius:6px;padding:0 .35rem;margin-left:.3rem}
+.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem}
+.row{display:flex;justify-content:space-between;gap:.8rem;padding:.55rem 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.row:last-child{border:0}
+.remaining{flex:none;font-weight:800;color:var(--eosin);min-width:4.5rem;text-align:right}
+.grade{margin:.5rem 0}
+.grade div{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem}
+.grade u{display:block;height:7px;border-radius:5px;background:var(--hema-soft);margin-top:.2rem;text-decoration:none;overflow:hidden}
+.grade u i{display:block;height:100%;background:var(--hema);border-radius:5px}
+.grade.low u i{background:var(--eosin)}
+footer{margin:2rem 0 1rem;text-align:center}
+.error{padding:2rem;text-align:center}
+</style>
+</head>
+<body>
+<main id="app">
+<header><h1>HSU Student Dashboard</h1><span class="muted" id="meta"></span></header>
+<section class="hero" style="margin-top:0"><div class="plate" id="plate"></div><div style="flex:1;min-width:230px"><div id="next"></div><div class="stats" id="stats"></div></div></section>
+<section><div class="bar"><h2>Weekly timetable</h2><div class="seg" id="weeks"></div></div><div class="today" id="today"></div><div class="scroll"><div class="timetable" id="timetable"></div></div></section>
+<section class="columns"><div><h2>Exams</h2><div class="box" id="exams"></div></div><div><h2 id="gradesTitle">Grades</h2><div class="box" id="grades"></div></div></section>
+<section id="trendSection" hidden><h2>GPA trend</h2><div class="box" id="trend"></div></section>
+<footer class="muted" id="footer"></footer>
+</main>
+<script type="module">
+const $ = (selector) => document.querySelector(selector);
+const esc = (value) => String(value ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const text = (value) => `<span dir="auto">${esc(value)}</span>`;
+const DAYS = [["sat", "Saturday"], ["sun", "Sunday"], ["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"]];
+const SEMESTERS = { first: "1st semester", second: "2nd semester", summer: "Summer term" };
+const WEEKS = [["odd", "Odd week"], ["even", "Even week"], ["all", "All"]];
+const hourOf = (time) => Number(time.slice(0, 2));
+const isLeap = (year) => [1, 5, 9, 13, 17, 22, 26, 30].includes(year % 33);
+
+const jalaliToday = () => {
+  const parts = new Intl.DateTimeFormat("en-u-ca-persian-nu-latn", { year: "numeric", month: "numeric", day: "numeric" }).formatToParts(new Date());
+  return ["year", "month", "day"].map((type) => Number(parts.find((p) => p.type === type).value));
+};
+
+const jalaliDayNumber = (year, month, day) => {
+  let days = 0;
+  for (let y = 1; y < year; y++) days += isLeap(y) ? 366 : 365;
+  return days + (month <= 6 ? (month - 1) * 31 : 186 + (month - 7) * 30) + day;
+};
+
+const loadData = async () => {
+  const response = await fetch("/api/data");
+  if (!response.ok) throw new Error((await response.json()).error);
+  return response.json();
+};
+
+const withCountdown = (exams) => {
+  const today = jalaliDayNumber(...jalaliToday());
+  return exams
+    .map((exam) => ({ ...exam, left: exam.date ? jalaliDayNumber(...exam.date.split("/").map(Number)) - today : null }))
+    .sort((a, b) => (a.left ?? Infinity) - (b.left ?? Infinity));
+};
+
+const renderHero = (data, exams) => {
+  const next = exams.find((exam) => exam.left !== null && exam.left >= 0);
+  const upcoming = exams.filter((exam) => exam.left !== null && exam.left >= 0).length;
+  $("#plate").innerHTML = next ? `<b>${next.left}</b><span>days left</span>` : "<span>No upcoming<br>exams</span>";
+  $("#next").innerHTML = next
+    ? `<p class="muted">Next exam</p><h2>${text(next.course)}</h2><p class="muted">${esc(next.date)}, ${text(next.teacher)}</p>`
+    : "<h2>No upcoming exams</h2>";
+  const stats = [
+    [data.grades.gpa, "Last term GPA"],
+    [data.transcript?.cumulative_gpa, "Cumulative GPA"],
+    [data.grades.total_units, "Units last term"],
+    [upcoming, "Upcoming exams"],
+    [data.schedule.sessions.length, "Weekly sessions"],
+  ].filter(([value]) => value !== null && value !== undefined);
+  $("#stats").innerHTML = stats.map(([value, label]) => `<div><b>${value}</b><span class="muted">${label}</span></div>`).join("");
+};
+
+const renderTimetable = (data, week) => {
+  const all = data.schedule.sessions;
+  const sessions = all.filter((s) => week === "all" || s.week === "every" || s.week === week);
+  const first = Math.min(...all.map((s) => hourOf(s.start)));
+  const last = Math.max(...all.map((s) => hourOf(s.end)));
+  const columns = last - first;
+  const grid = $("#timetable");
+  grid.style.gridTemplateColumns = `7rem repeat(${columns}, 1fr)`;
+  grid.style.gridTemplateRows = `2rem repeat(${DAYS.length}, minmax(5rem, auto))`;
+  const todayIndex = (new Date().getDay() + 1) % 7;
+  let html = '<div class="hour"></div>';
+  for (let h = first; h < last; h++) html += `<div class="hour">${h}</div>`;
+  DAYS.forEach(([, label], index) => {
+    html += `<div class="day${index === todayIndex ? " current" : ""}">${label}</div>` + '<div class="cell"></div>'.repeat(columns);
+  });
+  sessions.forEach((s) => {
+    const row = DAYS.findIndex(([key]) => key === s.day) + 2;
+    if (row < 2) return;
+    const badge = s.week === "every" ? "" : `<i>${s.week}</i>`;
+    html += `<div class="session${s.kind === "lab" ? " lab" : ""}" style="grid-row:${row};grid-column:${hourOf(s.start) - first + 2}/${hourOf(s.end) - first + 2}"><b>${text(s.course)}${badge}</b><small>${text(s.location ?? "Location not set")}</small><small>${text(s.teachers[0] ?? "")}</small></div>`;
+  });
+  grid.innerHTML = html;
+  const today = sessions.filter((s) => s.day === DAYS[todayIndex]?.[0]).sort((a, b) => a.start.localeCompare(b.start));
+  $("#today").innerHTML = today.length
+    ? today.map((s) => `<div class="chip${s.kind === "lab" ? " lab" : ""}"><b>${text(s.course)}</b><br><span class="muted">${s.start} to ${s.end}, ${text(s.location ?? "Location not set")}</span></div>`).join("")
+    : '<span class="muted">No classes today for the selected week.</span>';
+  document.querySelectorAll("#weeks button").forEach((button) => button.setAttribute("aria-pressed", button.dataset.week === week));
+};
+
+const renderExams = (exams) => {
+  const label = (exam) => (exam.left === null ? "" : exam.left < 0 ? "Done" : exam.left === 0 ? "Today" : `${exam.left} days`);
+  $("#exams").innerHTML = exams
+    .map((exam) => `<div class="row"><div><b>${text(exam.course)}</b><br><span class="muted">${esc(exam.date ?? "Date not announced")}</span></div><div class="remaining">${label(exam)}</div></div>`)
+    .join("");
+};
+
+const renderGrades = (grades) => {
+  $("#gradesTitle").textContent = `Grades, ${grades.academic_year} ${SEMESTERS[grades.semester] ?? grades.semester}`;
+  $("#grades").innerHTML = [...grades.courses]
+    .sort((a, b) => b.grade - a.grade)
+    .map((c) => `<div class="grade${c.grade < 17 ? " low" : ""}"><div>${text(c.name)}<b>${c.grade.toFixed(2)}</b></div><u><i style="width:${c.grade * 5}%"></i></u></div>`)
+    .join("");
+};
+
+const renderTrend = (transcript) => {
+  if (!transcript?.terms.length) return;
+  const terms = transcript.terms;
+  const width = 640, base = 190, low = 14, high = 20, step = width / terms.length;
+  const y = (value) => base - ((value - low) / (high - low)) * (base - 30);
+  const x = (index) => index * step + step / 2;
+  const bars = terms.map((t, i) => `<rect x="${x(i) - step * 0.27}" y="${y(t.term_gpa)}" width="${step * 0.54}" height="${base - y(t.term_gpa)}" rx="6" fill="var(--hema-soft)" stroke="var(--hema)"/><text x="${x(i)}" y="${y(t.term_gpa) - 6}" text-anchor="middle" font-size="13" font-weight="800" fill="var(--hema)">${t.term_gpa}</text><text x="${x(i)}" y="${base + 18}" text-anchor="middle" font-size="12" fill="var(--muted)">${t.academic_year} ${t.semester}</text>`).join("");
+  const line = `<polyline fill="none" stroke="var(--eosin)" stroke-width="2.5" points="${terms.map((t, i) => `${x(i)},${y(t.cumulative_gpa)}`).join(" ")}"/>`;
+  const dots = terms.map((t, i) => `<circle cx="${x(i)}" cy="${y(t.cumulative_gpa)}" r="4" fill="var(--eosin)"/>`).join("");
+  $("#trendSection").hidden = false;
+  $("#trend").innerHTML = `<svg viewBox="0 0 ${width} ${base + 34}" style="width:100%;height:auto">${bars}${line}${dots}</svg><p class="muted">Bars show each term's GPA, the line shows the cumulative GPA. Cumulative GPA ${transcript.cumulative_gpa} over ${transcript.units_passed} passed units.</p>`;
+};
+
+try {
+  const data = await loadData();
+  const exams = withCountdown(data.exams);
+  $("#meta").textContent = `${data.home.academic_year}, ${SEMESTERS[data.home.semester] ?? data.home.semester}, ${data.home.week} week (from the portal)`;
+  $("#weeks").innerHTML = WEEKS.map(([key, label]) => `<button data-week="${key}">${label}${key === data.week ? " (current)" : ""}</button>`).join("");
+  $("#weeks").onclick = (event) => event.target.dataset.week && renderTimetable(data, event.target.dataset.week);
+  renderHero(data, exams);
+  renderTimetable(data, data.week);
+  renderExams(exams);
+  renderGrades(data.grades);
+  renderTrend(data.transcript);
+  $("#footer").textContent = `Data generated ${data.generated_at}. Unofficial, not affiliated with Hakim Sabzevari University.`;
+} catch (error) {
+  $("#app").innerHTML = `<div class="error"><h2>No data to show</h2><p class="muted">${esc(error.message)}</p></div>`;
+}
+</script>
+</body>
+</html>

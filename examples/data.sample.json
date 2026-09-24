@@ -1,0 +1,277 @@
+{
+  "generated_at": "2026-01-01T12:00:00",
+  "week": "odd",
+  "home": {
+    "academic_year": "1405-1406",
+    "semester": "first",
+    "week": "odd"
+  },
+  "schedule": {
+    "academic_year": "1405-1406",
+    "semester": "first",
+    "sessions": [
+      {
+        "course": "Molecular Biology Lab",
+        "group": "1",
+        "teachers": [
+          "Dr. Rahimi"
+        ],
+        "location": "Lab 101",
+        "week": "every",
+        "kind": "lab",
+        "day": "sat",
+        "start": "08:00",
+        "end": "10:00"
+      },
+      {
+        "course": "Genetics",
+        "group": "1",
+        "teachers": [
+          "Dr. Karimi"
+        ],
+        "location": "Room 210",
+        "week": "every",
+        "kind": "lecture",
+        "day": "sun",
+        "start": "10:00",
+        "end": "12:00"
+      },
+      {
+        "course": "Biochemistry",
+        "group": "1",
+        "teachers": [
+          "Dr. Ahmadi"
+        ],
+        "location": "Room 207",
+        "week": "every",
+        "kind": "lecture",
+        "day": "mon",
+        "start": "08:00",
+        "end": "10:00"
+      },
+      {
+        "course": "Statistics",
+        "group": "1",
+        "teachers": [
+          "Dr. Sadeghi"
+        ],
+        "location": "Room 158",
+        "week": "every",
+        "kind": "lecture",
+        "day": "mon",
+        "start": "14:00",
+        "end": "16:00"
+      },
+      {
+        "course": "Microbiology",
+        "group": "1",
+        "teachers": [
+          "Dr. Hosseini"
+        ],
+        "location": "Room 220",
+        "week": "odd",
+        "kind": "lecture",
+        "day": "tue",
+        "start": "08:00",
+        "end": "10:00"
+      },
+      {
+        "course": "Developmental Biology",
+        "group": "1",
+        "teachers": [
+          "Dr. Naderi"
+        ],
+        "location": "Room 216",
+        "week": "even",
+        "kind": "lecture",
+        "day": "tue",
+        "start": "16:00",
+        "end": "18:00"
+      },
+      {
+        "course": "Bioinformatics",
+        "group": "1",
+        "teachers": [
+          "Dr. Moradi"
+        ],
+        "location": "Room 305",
+        "week": "every",
+        "kind": "lecture",
+        "day": "wed",
+        "start": "10:00",
+        "end": "12:00"
+      },
+      {
+        "course": "Cell Culture Lab",
+        "group": "1",
+        "teachers": [
+          "Dr. Ebrahimi"
+        ],
+        "location": "Lab 102",
+        "week": "every",
+        "kind": "lab",
+        "day": "wed",
+        "start": "14:00",
+        "end": "16:00"
+      }
+    ]
+  },
+  "exams": [
+    {
+      "code": "100001",
+      "group": "1",
+      "course": "Genetics",
+      "teacher": "Dr. Karimi",
+      "slot": "6",
+      "date": "1405/10/19",
+      "room": null,
+      "note": null
+    },
+    {
+      "code": "100002",
+      "group": "1",
+      "course": "Biochemistry",
+      "teacher": "Dr. Ahmadi",
+      "slot": "10",
+      "date": "1405/10/22",
+      "room": null,
+      "note": null
+    },
+    {
+      "code": "100003",
+      "group": "1",
+      "course": "Statistics",
+      "teacher": "Dr. Sadeghi",
+      "slot": "14",
+      "date": "1405/10/26",
+      "room": null,
+      "note": null
+    },
+    {
+      "code": "100004",
+      "group": "1",
+      "course": "Bioinformatics",
+      "teacher": "Dr. Moradi",
+      "slot": "6",
+      "date": "1405/10/28",
+      "room": null,
+      "note": null
+    },
+    {
+      "code": "100005",
+      "group": "1",
+      "course": "Cell Culture Lab",
+      "teacher": "Dr. Ebrahimi",
+      "slot": "6",
+      "date": null,
+      "room": null,
+      "note": "Held as a workshop"
+    }
+  ],
+  "grades": {
+    "academic_year": "1404-1405",
+    "semester": "second",
+    "courses": [
+      {
+        "code": "200001",
+        "name": "Organic Chemistry",
+        "units": 3,
+        "teacher": "Dr. Sample",
+        "grade": 17.5,
+        "status": "normal"
+      },
+      {
+        "code": "200002",
+        "name": "Cell Biology",
+        "units": 3,
+        "teacher": "Dr. Sample",
+        "grade": 18.25,
+        "status": "normal"
+      },
+      {
+        "code": "200003",
+        "name": "Physics for Biology",
+        "units": 2,
+        "teacher": "Dr. Sample",
+        "grade": 15.75,
+        "status": "normal"
+      },
+      {
+        "code": "200004",
+        "name": "Microbiology",
+        "units": 2,
+        "teacher": "Dr. Sample",
+        "grade": 19.0,
+        "status": "normal"
+      },
+      {
+        "code": "200005",
+        "name": "Microbiology Lab",
+        "units": 1,
+        "teacher": "Dr. Sample",
+        "grade": 18.5,
+        "status": "normal"
+      },
+      {
+        "code": "200006",
+        "name": "Biostatistics",
+        "units": 3,
+        "teacher": "Dr. Sample",
+        "grade": 16.0,
+        "status": "normal"
+      }
+    ],
+    "total_units": 14,
+    "gpa": 17.38
+  },
+  "transcript": {
+    "terms": [
+      {
+        "academic_year": "1403-1404",
+        "semester": "first",
+        "courses": [],
+        "units_taken": 17,
+        "units_passed": 17,
+        "term_gpa": 18.1,
+        "cumulative_units_taken": 17,
+        "cumulative_units_passed": 17,
+        "cumulative_gpa": 18.1
+      },
+      {
+        "academic_year": "1403-1404",
+        "semester": "second",
+        "courses": [],
+        "units_taken": 18,
+        "units_passed": 18,
+        "term_gpa": 16.9,
+        "cumulative_units_taken": 35,
+        "cumulative_units_passed": 35,
+        "cumulative_gpa": 17.5
+      },
+      {
+        "academic_year": "1404-1405",
+        "semester": "first",
+        "courses": [],
+        "units_taken": 18,
+        "units_passed": 18,
+        "term_gpa": 17.4,
+        "cumulative_units_taken": 53,
+        "cumulative_units_passed": 53,
+        "cumulative_gpa": 17.47
+      },
+      {
+        "academic_year": "1404-1405",
+        "semester": "second",
+        "courses": [],
+        "units_taken": 14,
+        "units_passed": 14,
+        "term_gpa": 17.38,
+        "cumulative_units_taken": 67,
+        "cumulative_units_passed": 67,
+        "cumulative_gpa": 17.45
+      }
+    ],
+    "cumulative_gpa": 17.45,
+    "units_passed": 67
+  }
+}
