@@ -21,7 +21,7 @@ I built this because the portal is annoying on mobile and I wanted a quick way t
 Needs Python 3.10 or newer.
 
 ```bash
-git clone https://github.com/<your-username>/hsu-student-dashboard.git
+git clone https://github.com/kanashi13/hsu-student-dashboard.git
 cd hsu-student-dashboard
 
 python -m venv .venv
