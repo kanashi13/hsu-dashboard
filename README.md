@@ -6,6 +6,11 @@ Not affiliated with HSU. Use it with your own account only. Don't commit your re
 
 I built this because the portal is annoying on mobile and I wanted a quick way to check my week without logging in every time.
 
+![Dashboard overview](docs/dashboard-top.png)
+
+![Exams, grades, and GPA trend](docs/dashboard-bottom.png)
+
+
 ## What it does
 
 - `hsu-dashboard fetch` logs in and saves your data as JSON.
